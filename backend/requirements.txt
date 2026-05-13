@@ -1,0 +1,46 @@
+# 🚨 CANONICAL DEPENDENCIES ONLY - DO NOT ADD MORE
+# These are the ONLY libraries allowed for backend development
+
+# Core FastAPI
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+
+# Configuration & Environment
+python-dotenv==1.0.0
+# pydantic >=2.11.2 is required by ag-ui-protocol 0.1.18 (the AI event schema
+# lives in ag_ui.core Pydantic models). Kept inside the pydantic v2 line so
+# existing user BaseModels keep working unchanged. pydantic-settings 2.11+ is
+# the first line that accepts pydantic>=2.11 — pinning lower triggers a
+# ResolutionImpossible at `pip install` time.
+pydantic>=2.11.2,<3.0.0
+pydantic-settings>=2.11.0,<3.0.0
+
+# Database (PostgreSQL only)
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+
+# Production server
+gunicorn==21.2.0
+
+# Authentication
+python-jose[cryptography]==3.3.0
+email-validator==2.1.0
+
+# HTTP client (email verification via Brevo)
+httpx==0.27.0
+
+# AI — AG-UI Protocol (open standard for agent↔UI streaming events)
+# Used by core/ag_ui_emitter.py. Pre-installed in base image so AI features
+# scaffold instantly. See documentation/architecture/plans/LAUNCH_PLAN_03_2026.md
+# ("PRE-LAUNCH DECISION: AI client library") for the rationale.
+ag-ui-protocol>=0.1.18,<0.2.0
+
+# ❌ DO NOT ADD:
+# - alembic (no migrations, create tables on startup)
+# - pandas/numpy (not needed for APIs)
+# - redis/celery (no caching/queues)
+# - copilotkit / @copilotkit/* (requires Node.js runtime bridge, not compatible
+#   with our Python-only backend. See LAUNCH_PLAN for the architectural decision)
+# - ai / @ai-sdk/* (Vercel SDK — deprecated platform-wide April 2026 after
+#   @vercel/oidc transitive dep broke in-browser; replaced by AG-UI above)

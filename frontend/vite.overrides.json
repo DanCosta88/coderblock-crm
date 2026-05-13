@@ -1,0 +1,14 @@
+{
+  "optimizeDeps": {
+    "include": [
+      "@hello-pangea/dnd",
+      "use-sync-external-store",
+      "use-sync-external-store/with-selector",
+      "use-sync-external-store/shim",
+      "use-sync-external-store/shim/with-selector"
+    ]
+  },
+  "resolve": {
+    "dedupe": ["use-sync-external-store", "react", "react-dom"]
+  }
+}

@@ -1,0 +1,218 @@
+# {PROJECT_NAME} - Application Context
+
+*Generated on: 2026-02-10 17:08:44 (pre-generated from template)*
+
+## Project Overview
+
+**Name**: {PROJECT_NAME}
+
+This is a new project created from the react-vite-ts template. It provides a modern React + TypeScript + Vite + Tailwind CSS foundation with pre-built UI components.
+
+**Type**: fullstack
+**Tech Stack**: react-vite-ts
+
+## Project Structure
+
+This application contains 103 source files organized in a layered architecture:
+- **Frontend**: User interface and client-side logic (`frontend/` directory)
+- **Backend**: Server-side logic and APIs (`backend/` directory)
+
+Total files:
+
+### Important Files
+- `source/frontend/README.md`
+- `source/frontend/index.html`
+- `source/frontend/dist/index.html`
+- `source/frontend/src/App.tsx`
+- `source/frontend/src/main.tsx`
+- `source/backend/README.md`
+- `source/backend/main.py`
+- `source/backend/alembic/README.md`
+
+### Configuration Files
+- `source/frontend/fly.toml`
+- `source/frontend/package-lock.json`
+- `source/frontend/package.json`
+- `source/frontend/postcss.config.js`
+- `source/frontend/tailwind.config.js`
+- `source/frontend/tsconfig.json`
+- `source/frontend/tsconfig.node.json`
+- `source/frontend/vite.config.ts`
+
+### Source Code Files
+- `source/frontend/dist/assets/index-Bp6RiaCs.css`
+- `source/frontend/dist/assets/index-CAg0wkps.js`
+- `source/frontend/src/index.css`
+- `source/frontend/src/router.tsx`
+- `source/frontend/src/vite-env.d.ts`
+- `source/frontend/src/components/Layout.tsx`
+- `source/frontend/src/components/motion.tsx`
+- `source/frontend/src/components/ui/accordion.tsx`
+- `source/frontend/src/components/ui/alert-dialog.tsx`
+- `source/frontend/src/components/ui/alert.tsx`
+- `source/frontend/src/components/ui/aspect-ratio.tsx`
+- `source/frontend/src/components/ui/avatar.tsx`
+- `source/frontend/src/components/ui/badge.tsx`
+- `source/frontend/src/components/ui/button.tsx`
+- `source/frontend/src/components/ui/card.tsx`
+- `source/frontend/src/components/ui/checkbox.tsx`
+- `source/frontend/src/components/ui/collapsible.tsx`
+- `source/frontend/src/components/ui/dialog.tsx`
+- `source/frontend/src/components/ui/dropdown-menu.tsx`
+- `source/frontend/src/components/ui/form.tsx`
+
+---
+
+## Detailed File Structure
+
+
+### source/backend/
+  - .dockerignore
+  - .env
+  - .env.example
+  - .gitignore
+  - API_GUIDE.md
+  - Dockerfile
+  - MIGRATIONS_STANDARD.md
+  - README.md
+  - README_SIMPLE_BACKEND.md
+  - alembic.ini
+  - main.py
+  - requirements.txt
+
+### source/backend/alembic/
+  - README.md
+  - env.py
+  - script.py.mako
+
+### source/backend/core/
+  - __init__.py
+  - config.py
+  - database.py
+
+### source/backend/database/
+  - base_schema.sql
+
+### source/backend/models/
+  - __init__.py
+  - item.py
+  - user.py
+
+### source/backend/routes/
+  - __init__.py
+  - auth.py
+  - health.py
+  - items.py
+
+### source/backend/services/
+  - __init__.py
+  - auth_service.py
+  - item_service.py
+
+### source/frontend/
+  - .dockerignore
+  - .env
+  - .env.example
+  - .env.local
+  - .env.local.example
+  - .env.production
+  - Dockerfile
+  - FRONTEND_API_GUIDE.md
+  - README.md
+  - TEMPLATE_INFO.md
+  - fly.toml
+  - index.html
+  - nginx.conf
+  - package-lock.json
+  - package.json
+  - postcss.config.js
+  - tailwind.config.js
+  - tsconfig.json
+  - tsconfig.node.json
+  - vite.config.ts
+
+### source/frontend/dist/
+  - index.html
+
+### source/frontend/dist/assets/
+  - index-Bp6RiaCs.css
+  - index-CAg0wkps.js
+  - index-CAg0wkps.js.map
+
+### source/frontend/public/audio/
+  - .gitkeep
+
+### source/frontend/public/docs/
+  - .gitkeep
+
+### source/frontend/public/fonts/
+  - .gitkeep
+
+### source/frontend/public/images/
+  - .gitkeep
+
+### source/frontend/public/videos/
+  - .gitkeep
+
+### source/frontend/src/
+  - App.tsx
+  - index.css
+  - main.tsx
+  - router.tsx
+  - vite-env.d.ts
+
+### source/frontend/src/components/
+  - Layout.tsx
+  - motion.tsx
+
+### source/frontend/src/components/ui/
+  - accordion.tsx
+  - alert-dialog.tsx
+  - alert.tsx
+  - aspect-ratio.tsx
+  - avatar.tsx
+  - badge.tsx
+  - button.tsx
+  - card.tsx
+  - checkbox.tsx
+  - collapsible.tsx
+  - dialog.tsx
+  - dropdown-menu.tsx
+  - form.tsx
+  - index.ts
+  - input.tsx
+  - label.tsx
+  - popover.tsx
+  - progress.tsx
+  - radio-group.tsx
+  - scroll-area.tsx
+  ... and 13 more files
+
+### source/frontend/src/hooks/
+  - useAnalytics.ts
+
+### source/frontend/src/lib/
+  - utils.ts
+
+### source/frontend/src/pages/
+  - HomePage.tsx
+  - NotFoundPage.tsx
+
+### source/frontend/src/services/
+  - api.ts
+---
+
+## Development Context
+
+**Framework Pattern**: Based on the files above, this appears to be a fullstack application.
+
+**Key Components**: The main application logic is structured around the files shown above.
+
+**Development Notes**: 
+- This context file provides a comprehensive overview of the application structure
+- Use this information to understand the codebase when making modifications
+- Key files have been prioritized for relevance and readability
+
+*Total files analyzed: 103*
+*Context generated by Coderblock AI (pre-generated from template)*
+

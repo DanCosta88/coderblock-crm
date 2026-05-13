@@ -1,0 +1,83 @@
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from sqlalchemy import text
+from core.database import get_db
+from routes.auth import get_current_user
+from routes.database_query import _ensure_tables
+from pydantic import BaseModel
+from typing import Optional
+from datetime import datetime
+
+router = APIRouter(prefix="/demos", tags=["demos"])
+
+
+class DemoCreate(BaseModel):
+    prospect_id: int
+    demo_type: str
+    brief: Optional[str] = None
+    status: Optional[str] = "queued"
+    deadline: Optional[datetime] = None
+
+
+class DemoUpdate(BaseModel):
+    demo_type: Optional[str] = None
+    brief: Optional[str] = None
+    status: Optional[str] = None
+    deadline: Optional[datetime] = None
+
+
+def row_to_dict(row):
+    if row is None:
+        return None
+    return dict(row._mapping)
+
+
+@router.get("")
+async def list_demos(current_user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
+    rows = db.execute(text("""
+        SELECT d.*, p.first_name || ' ' || p.last_name as prospect_name, p.company
+        FROM demos d
+        JOIN prospects p ON p.id = d.prospect_id
+        WHERE d.user_id = :uid
+        ORDER BY d.deadline ASC NULLS LAST, d.created_at DESC
+    """), {"uid": current_user["id"]}).fetchall()
+    return [row_to_dict(r) for r in rows]
+
+
+@router.post("")
+async def create_demo(data: DemoCreate, current_user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
+    result = db.execute(text("""
+        INSERT INTO demos (prospect_id, user_id, demo_type, brief, status, deadline)
+        VALUES (:pid, :uid, :type, :brief, :status, :deadline)
+        RETURNING *
+    """), {
+        "pid": data.prospect_id, "uid": current_user["id"],
+        "type": data.demo_type, "brief": data.brief,
+        "status": data.status or "queued", "deadline": data.deadline
+    })
+    db.commit()
+    return row_to_dict(result.fetchone())
+
+
+@router.patch("/{demo_id}")
+async def update_demo(demo_id: int, data: DemoUpdate, current_user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
+    updates = {k: v for k, v in data.dict().items() if v is not None}
+    if not updates:
+        raise HTTPException(status_code=400, detail="No fields to update")
+    set_clauses = ", ".join([f"{k} = :{k}" for k in updates.keys()])
+    set_clauses += ", updated_at = NOW()"
+    updates["id"] = demo_id
+    updates["uid"] = current_user["id"]
+    result = db.execute(text(f"UPDATE demos SET {set_clauses} WHERE id = :id AND user_id = :uid RETURNING *"), updates)
+    db.commit()
+    row = result.fetchone()
+    if not row:
+        raise HTTPException(status_code=404, detail="Demo not found")
+    return row_to_dict(row)
+
+
+@router.delete("/{demo_id}")
+async def delete_demo(demo_id: int, current_user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
+    db.execute(text("DELETE FROM demos WHERE id = :id AND user_id = :uid"), {"id": demo_id, "uid": current_user["id"]})
+    db.commit()
+    return {"ok": True}
